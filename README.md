@@ -1,3 +1,3 @@
 
 
-A CRUD REST API built with Express, TypeScript, Prisma, and PostgreSQL.
+A CRUD REST API built with Express, TypeScript, Prisma, and PostgreSQL.the readme on dev
