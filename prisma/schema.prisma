@@ -11,9 +11,14 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+enum TaskStatus {
+  pending
+  active
+  done
+}
 model Task {
   id        Int     @id @default(autoincrement())
   title     String
-  done      Boolean  @default(false)
+  status     TaskStatus  @default(pending)
   createdAt DateTime @default(now())
 }

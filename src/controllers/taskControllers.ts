@@ -23,6 +23,7 @@ export const getTask = async (req: Request, res: Response) => {
     }
     res.status(200).json(task);
   } catch (err) {
+    logger.error(`Failed to fetch task: ${err}`);
     res.status(500).json({ error: "Failed to fetch task" });
   }
 };
@@ -36,6 +37,7 @@ export const createTask = async (req: Request, res: Response) => {
     const task = await taskService.createTask(result.data);
     res.status(201).json(task);
   } catch (err) {
+    logger.error(`Failed to create task: ${err}`);
     res.status(500).json({ error: "Failed to create task" });
   }
 };
@@ -50,6 +52,7 @@ export const updateTask = async (req: Request, res: Response) => {
     const task = await taskService.updateTask(id, result.data);
     res.status(200).json(task);
   } catch (err) {
+    logger.error(`Failed to update task: ${err}`);
     res.status(500).json({ error: "Failed to update task" });
   }
 };
@@ -60,6 +63,7 @@ export const deleteTask = async (req: Request, res: Response) => {
     await taskService.deleteTask(id);
     res.status(200).json({ message: "Task deleted" });
   } catch (err) {
+    logger.error(`Failed to update task: ${err}`);
     res.status(500).json({ error: "Failed to delete task" });
   }
 };
