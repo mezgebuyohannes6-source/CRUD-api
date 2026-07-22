@@ -1,12 +1,15 @@
 import { Request, Response } from 'express';
 import * as taskService from '../services/taskService';
 import { createTaskSchema, updateTaskSchema } from '../validators/taskValidator';
+import logger from '../logger';
 
 export const getTasks = async (req: Request, res: Response) => {
   try {
     const tasks = await taskService.getAllTasks();
     res.status(200).json(tasks);
   } catch (err) {
+    // to implement the logger instead of console.log(...)
+    logger.error(`Failed to fetch tasks: ${err}`)
     res.status(500).json({ error: "Failed to fetch tasks" });
   }
 };
