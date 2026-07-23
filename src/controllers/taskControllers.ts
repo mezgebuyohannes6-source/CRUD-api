@@ -50,6 +50,9 @@ export const updateTask = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
     const task = await taskService.updateTask(id, result.data);
+    if (!task){
+      return res.status(404).json({ error: "Task not Found"});
+    }
     res.status(200).json(task);
   } catch (err) {
     logger.error(`Failed to update task: ${err}`);
@@ -60,10 +63,13 @@ export const updateTask = async (req: Request, res: Response) => {
 export const deleteTask = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
-    await taskService.deleteTask(id);
+    const task = await taskService.deleteTask(id);
+   if (!task) {
+    return res.status(404).json({ error: "Task not found"});
+   }
     res.status(200).json({ message: "Task deleted" });
   } catch (err) {
-    logger.error(`Failed to update task: ${err}`);
+    logger.error(`Failed to delete task: ${err}`);
     res.status(500).json({ error: "Failed to delete task" });
   }
 };
